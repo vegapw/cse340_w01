@@ -89,6 +89,11 @@ nav ul li {
   padding: 10px;
 }
 
+.card {
+  margin: 10px auto;
+  padding: 10px;
+}
+
 section h2 {
   text-align: left;
   margin: 5px;
