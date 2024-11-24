@@ -90,7 +90,7 @@ nav ul li {
 }
 
 .card {
-  margin: 10px auto;
+  margin: 10px;
   padding: 10px;
 }
 
@@ -190,7 +190,7 @@ img {
   .principal {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: 1rem;
   }
 
   div .card:first-child{
