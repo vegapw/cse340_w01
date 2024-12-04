@@ -182,6 +182,37 @@ img {
 }
 
 
+/******* Classification style ***************/
+
+ul#inv-display {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  justify-items: center;
+  margin: 10px;
+  padding: 10px;
+}
+
+ul#inv-display li{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+}
+
+ul#inv-display li a{
+  align-self: center;
+}
+
+ul#inv-display li img{
+  max-width: 200px;
+}
+
+ul#inv-display li div{
+  display: block;
+  text-align: center;
+}
+
+/******* Large Screen Style ***************/
 @media screen and (min-width : 650px) {
   body {
     font-weight: 400;
