@@ -58,6 +58,32 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
+/* **************************************
+* Build the Item inventory detailed view
+* ************************************ */
+Util.buildItemView = async function(data){
+  let container
+  if(data.length > 0){
+    container = '<div id="det-item">'
+    container += '<section class="card">'
+    container += '<h1>' + data[0].inv_year + ' ' + data[0].inv_make + '</h1>'
+    container += '<picture><img src="' + data[0].inv_image + '" alt="Image of ' 
+    + data[0].inv_make + data[0].inv_model + '"></picture>'
+    container += '</section><section class="card">'
+    container += '<h3>' + data[0].inv_make + ' Details</h3>'
+    container += '<p><span>Price:</span> $' 
+    + new Intl.NumberFormat('en-US').format(data[0].inv_price) + '</p>'
+    container += '<p><span>Description:</span> '+ data[0].inv_description + '</p>'
+    container += '<p><span>Color:</span> '+ data[0].inv_color + '</p>'
+    container += '<p><span>Miles:</span> ' 
+    + new Intl.NumberFormat('en-US').format(data[0].inv_miles) + '</p>'
+    container += '</section></div>'
+  } else { 
+    container += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return container
+}
+
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
