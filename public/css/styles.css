@@ -236,6 +236,58 @@ ul#inv-display li div{
   text-align: center;
 }
 
+/******* Login view Style ***************/
+
+.logincont {
+  justify-items: center;
+}
+
+.login fieldset{
+  margin: 2rem 0;
+  border: solid 1px var(--back2);
+  border-radius: 6px;
+  padding: .5rem 2%;
+  max-width: 100%;
+  background-color: var(--optional2);
+}
+
+.login label {
+  display: block;
+  padding-top: .7rem;
+  padding-bottom: .3rem;
+  margin: 10px 10px;
+}
+
+.login input[type="email"],
+.login input[type="password"] {
+  display: block;
+  background-color: #eee;
+  border: 1px solid #999;
+  border-radius: 6px;
+  padding: .75rem;
+  color: var(--fontcol);
+  width: 100%;
+  max-width: 400px;
+  margin: 5px 0;
+}
+
+.login input[type="submit"] {
+  display: block;
+  justify-self: center;
+  border: none;
+  background-image: linear-gradient(var(--back4), #eee);
+  color: var(--fontcol);
+  padding: .3rem;
+  margin: .3rem 0;
+  border-radius: 8px;
+  font-size: medium;
+}
+
+.login span{
+  display: block;
+  justify-self: center;
+  margin: 5px 0;
+}
 
 
 /******* Large Screen Style ***************/
