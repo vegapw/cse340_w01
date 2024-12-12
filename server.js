@@ -17,6 +17,7 @@ const errorRoute = require("./routes/errorRoute")
 const session = require("express-session")
 const pool = require("./database/")
 const accountRoute = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
 
 /* ***********************
  * Middleware
@@ -40,6 +41,9 @@ app.use(function (req, res, next){
   next()
 })
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended:true})) // for parsing application/x-www-form-urlencoded
+
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -54,13 +58,13 @@ app.use(static)
 /*app.get('/', (req, res) => {
   res.render('index', {title:"Home"});
 });*/
-app.get('/', utilities.handleErrors(baseController.buildHome))
+app.get('/', baseController.buildHome)
 // Inventory routes
-app.use("/inv", utilities.handleErrors(inventoryRoute))
+app.use("/inv", inventoryRoute)
 // Account routes
-app.use("/account", utilities.handleErrors(accountRoute))
+app.use("/account", accountRoute)
 // error route
-app.use("/error", utilities.handleErrors(errorRoute))
+app.use("/error", errorRoute)
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})

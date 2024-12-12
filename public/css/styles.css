@@ -10,6 +10,8 @@
   --optional1: #BAC1B8;
   --optional2: #58A4B0;
   --font-size: .9rem;
+  --back-button:linear-gradient(var(--back4), #eee);
+  --border:#000;
 }
 
 *,
@@ -238,11 +240,16 @@ ul#inv-display li div{
 
 /******* Login view Style ***************/
 
-.logincont {
+main .formcont{
+  display: block;
   justify-items: center;
 }
 
-.login fieldset{
+.form{
+  max-width: 400px;
+}
+
+.form fieldset{
   margin: 2rem 0;
   border: solid 1px var(--back2);
   border-radius: 6px;
@@ -251,15 +258,17 @@ ul#inv-display li div{
   background-color: var(--optional2);
 }
 
-.login label {
+.form label {
   display: block;
   padding-top: .7rem;
   padding-bottom: .3rem;
-  margin: 10px 10px;
+  margin: 10px 15px;
+  min-width: 300px;
 }
 
-.login input[type="email"],
-.login input[type="password"] {
+.form input[type="email"],
+.form input[type="password"],
+.form input[type="text"] {
   display: block;
   background-color: #eee;
   border: 1px solid #999;
@@ -267,15 +276,14 @@ ul#inv-display li div{
   padding: .75rem;
   color: var(--fontcol);
   width: 100%;
-  max-width: 400px;
   margin: 5px 0;
 }
 
-.login input[type="submit"] {
+.form input[type="submit"] {
   display: block;
   justify-self: center;
   border: none;
-  background-image: linear-gradient(var(--back4), #eee);
+  background-image: var(--back-button);
   color: var(--fontcol);
   padding: .3rem;
   margin: .3rem 0;
@@ -283,12 +291,29 @@ ul#inv-display li div{
   font-size: medium;
 }
 
-.login span{
+.form span{
   display: block;
   justify-self: center;
   margin: 5px 0;
 }
 
+.form #showpsw{
+  border-radius: 5px;
+  padding: 4px;
+  font-size: small;
+  text-align: center;
+  justify-self: left;
+  background-image: var(--back-button);
+  margin-left: 10px;
+}
+
+.form input:required {
+  border-right: 6px solid red;
+}
+
+.form input:required:valid {
+  border-right: 6px solid green;
+}
 
 /******* Large Screen Style ***************/
 @media screen and (min-width : 650px) {
