@@ -16,4 +16,11 @@ router.post("/register",
     regValidate.checkRegData,
     utilities.handleErrors(accController.registerAccount))
 
+router.post("/login", 
+    regValidate.loginRules(),
+    regValidate.checkLogData,
+    async (req, res) => {
+    res.status(200).send("Login process")
+})
+
 module.exports = router;

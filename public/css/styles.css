@@ -315,6 +315,16 @@ main .formcont{
   border-right: 6px solid green;
 }
 
+.notice {
+  margin: 10px 20px;
+  color: var(--back3);
+}
+
+.notice_good {
+  margin: 10px 20px;
+  color: var(--optional2);
+}
+
 /******* Large Screen Style ***************/
 @media screen and (min-width : 650px) {
   body {
