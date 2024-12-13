@@ -82,5 +82,43 @@ invCont.registerClassification = async function (req, res, next) {
   }
 }
 
+/* ***************************
+ *  Build Add inventory view
+ * ************************** */
+invCont.buildAddInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  let classificationList = await utilities.buildClassificationList(null)
+  res.render("./inventory/add-inventory", {
+    title: "Add Inventory",
+    nav,
+    errors: null,
+    classificationList,
+  })
+}
+
+/* ***************************
+ *  Register new inventory 
+ * ************************** */
+invCont.registerInventory = async function (req, res, next) {
+  const { inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id } = req.body
+  const regResult = await invModel.registerInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id)
+
+  if (regResult) {
+    let nav = await utilities.getNav()
+    req.flash("notice_good", `Congratulations the inventory ${inv_make} was added successfully`)
+    res.status(201).render("./inventory/management", {
+      title: "Vehicle Management",
+      nav,
+    })
+  } else {
+    req.flash("notice", `Sorry the registration failed.`)
+    res.status(501).render("./inventory/add-inventory", {
+      title: "Add Inventory",
+      nav,
+      errors: null,
+    })
+  }
+}
+
 
 module.exports = invCont

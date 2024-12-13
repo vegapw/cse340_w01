@@ -62,7 +62,6 @@ const validate = {}
         //valid email is required and cannot already exist in the DB
         body("account_email")
         .trim()
-        .escape()
         .isEmail()
         .normalizeEmail() 
         .withMessage("A valid email is required."), // on error this message is sent

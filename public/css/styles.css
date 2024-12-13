@@ -268,7 +268,9 @@ main .formcont{
 
 .form input[type="email"],
 .form input[type="password"],
-.form input[type="text"] {
+.form input[type="text"],
+.form textarea,
+.form select {
   display: block;
   background-color: #eee;
   border: 1px solid #999;

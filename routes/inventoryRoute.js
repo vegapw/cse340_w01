@@ -17,10 +17,19 @@ router.get("/", utilities.handleErrors(invController.buildManagement))
 // Route to build the add-classification view
 router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
 
-// Route to build the add-classification view
+// Route to register a new classification 
 router.post("/add-classification", 
-    invValidation.registrationRules(),
+    invValidation.classificationRules(),
     invValidation.checkClassificationData,
     utilities.handleErrors(invController.registerClassification))
+
+// Route to build the add-inventory view
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
+
+// Route to register a new inventory 
+router.post("/add-inventory", 
+    invValidation.inventoryRules(),
+    invValidation.checkInventoryData,
+    utilities.handleErrors(invController.registerInventory))
 
 module.exports = router;

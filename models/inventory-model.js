@@ -41,7 +41,7 @@ async function getInventoryItemById(inventory_id){
     }
   }
 
-  /* ***************************
+/* ***************************
  *  Register a new classification
  * ************************** */
 async function registerClassification(classification_name) {
@@ -66,4 +66,29 @@ async function checkExistingClassification(classification_name) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItemById, registerClassification, checkExistingClassification}
+/* ***************************
+ *  Register a new inventory
+ * ************************** */
+async function registerInventory(inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) {
+  try {
+    const sql = "INSERT INTO inventory (inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *"
+    return await pool.query(sql, [inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id])
+  } catch (error) {
+    return error.message
+  }
+}
+
+/* ***************************
+ *  Check if a inventory exists
+ * ************************** */
+async function checkExistingInventory(inv_make) {
+  try {
+    const sql = "SELECT * FROM inventory WHERE inv_make = $1"
+    const classification = await pool.query(sql, [inv_make])
+    return classification.rowCount
+  } catch (error) {
+    return error.message
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getInventoryItemById, registerClassification, checkExistingClassification, registerInventory, checkExistingInventory}
