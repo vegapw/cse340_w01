@@ -325,6 +325,15 @@ main .formcont{
   color: var(--optional2);
 }
 
+/******* Management view Style ***************/
+
+.options ul{
+  display: block;
+  margin: 15px 15px;
+  padding: 15px 15px;
+  list-style: none;
+}
+
 /******* Large Screen Style ***************/
 @media screen and (min-width : 650px) {
   body {
