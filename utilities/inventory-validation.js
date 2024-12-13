@@ -84,7 +84,7 @@ validate.inventoryRules = () => {
         .escape()
         .notEmpty()
         .withMessage("Year must not be empty.")
-        .isDate({format: 'YYYY'})
+        .isLength({min: 4, max: 4})
         .withMessage("Year must be 4 digits long."),
 
         // inv_description must not be empty
