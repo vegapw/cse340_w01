@@ -27,9 +27,7 @@ const validate = {}
         //valid email is required and cannot already exist in the DB
         body("account_email")
         .trim()
-        .escape()
         .isEmail()
-        .normalizeEmail() 
         .withMessage("A valid email is required.") // on error this message is sent
         .custom(async (account_email) => {
             const emailExists = await accModel.checkExistingEmail(account_email)
@@ -63,7 +61,6 @@ const validate = {}
         body("account_email")
         .trim()
         .isEmail()
-        .normalizeEmail() 
         .withMessage("A valid email is required."), // on error this message is sent
 
         //password is required and must be minimum of 12 characters and include 1 capital letter, 1 number and 1 special character.
