@@ -44,4 +44,10 @@ router.post("/update",
     invValidation.checkUpdateData,
     utilities.handleErrors(invController.updateInventory))
 
+// Route to confirm the delete of a vehicle by id
+router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteInventory))
+
+// Route to delete an inventory 
+router.post("/delete", utilities.handleErrors(invController.deleteInventory))
+
 module.exports = router;
