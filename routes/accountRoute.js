@@ -16,14 +16,34 @@ router.post("/register",
     regValidate.checkRegData,
     utilities.handleErrors(accController.registerAccount))
 
+// Route to login
 router.post("/login", 
     regValidate.loginRules(),
     regValidate.checkLogData,
     utilities.handleErrors(accController.accountLogin)
 )
 
+// Route to build the management view for an account
 router.get("/", 
     utilities.checkLogin,
     utilities.handleErrors(accController.buildManagement))
+
+// Route to logout an account
+router.get("/logout", utilities.handleErrors(accController.logOut))
+
+// Route to logout an account
+router.get("/update/:account_id", utilities.handleErrors(accController.buildUpdateAccount))
+
+// Route to logout an account
+router.post("/update/info", 
+    regValidate.updateAccountInfoRules(),
+    regValidate.checkUpdateInfoData,
+    utilities.handleErrors(accController.updateAccountInfo))
+
+// Route to logout an account
+router.post("/update/password", 
+    regValidate.updateAccountPasswordRules(),
+    regValidate.checkUpdatePassData,
+    utilities.handleErrors(accController.updateAccountPass))
 
 module.exports = router;

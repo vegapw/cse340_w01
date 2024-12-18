@@ -38,4 +38,57 @@ async function getAccountByEmail(account_email) {
     }
   }
 
-module.exports = {registerAccount, checkExistingEmail, getAccountByEmail}
+/* ***************************
+ *  Check Existing Mail different Id
+ * ************************** */
+async function checkExistingEmailDifferentId(account_email, account_id) {
+    try {
+        const sql = "SELECT * FROM public.account WHERE account_email = $1 AND account_id <> $2"
+        const email = await pool.query(sql, [account_email, account_id])
+        return email.rowCount
+    } catch (error) {
+        return error.message
+    }
+}
+
+/* ***************************
+ *  Update account info
+ * ************************** */
+async function updateAccountInfo(account_firstname, account_lastname, account_email, account_id) {
+    try {
+        const sql = "UPDATE public.account SET account_firstname = $1, account_lastname = $2, account_email = $3 WHERE account_id = $4 RETURNING *"
+        const data = await pool.query(sql, [account_firstname, account_lastname, account_email, account_id])
+        return data.rows[0]
+    } catch (error) {
+        return error.message
+    }
+}
+
+/* ***************************
+ *  Update account password
+ * ************************** */
+async function updateAccountPass( account_id, account_password) {
+    try {
+        const sql = "UPDATE public.account SET account_password = $1 WHERE account_id = $2 RETURNING *"
+        const data = await pool.query(sql, [account_password, account_id])
+        return data.rows[0]
+    } catch (error) {
+        return error.message
+    }
+}
+
+/* ***************************
+ *  Get account by Id
+ * ************************** */
+async function getAccountById(account_id) {
+    try {
+        const sql = "SELECT * FROM public.account WHERE account_id = $1"
+        const accountData = await pool.query(sql, [account_id])
+        return accountData.rows[0]
+    } catch (error) {
+        return error.message
+    }
+}
+
+
+module.exports = {registerAccount, checkExistingEmail, getAccountByEmail, checkExistingEmailDifferentId, updateAccountInfo, updateAccountPass, getAccountById}

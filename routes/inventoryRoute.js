@@ -12,42 +12,59 @@ router.get("/type/:classificationId", utilities.handleErrors(invController.build
 router.get("/detail/:inventoryId", utilities.handleErrors(invController.buildByInventoryId))
 
 // Route to build the management view
-router.get("/", utilities.handleErrors(invController.buildManagement))
+router.get("/", 
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.buildManagement))
 
 // Route to build the add-classification view
-router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification))
+router.get("/add-classification",
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.buildAddClassification))
 
 // Route to register a new classification 
 router.post("/add-classification", 
+    utilities.checkAccountType,
     invValidation.classificationRules(),
     invValidation.checkClassificationData,
     utilities.handleErrors(invController.registerClassification))
 
 // Route to build the add-inventory view
-router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory))
+router.get("/add-inventory", 
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.buildAddInventory))
 
 // Route to register a new inventory 
-router.post("/add-inventory", 
+router.post("/add-inventory",
+    utilities.checkAccountType,
     invValidation.inventoryRules(),
     invValidation.checkInventoryData,
     utilities.handleErrors(invController.registerInventory))
 
 // Route to get the inventory by id
-router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON))
+router.get("/getInventory/:classification_id", 
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.getInventoryJSON))
 
 // Route to modify a vehicle by id
-router.get("/edit/:inv_id", utilities.handleErrors(invController.buildUpdateInventory))
+router.get("/edit/:inv_id", 
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.buildUpdateInventory))
 
 // Route to update an inventory 
-router.post("/update", 
+router.post("/update",
+    utilities.checkAccountType,
     invValidation.updateInventoryRules(),
     invValidation.checkUpdateData,
     utilities.handleErrors(invController.updateInventory))
 
 // Route to confirm the delete of a vehicle by id
-router.get("/delete/:inv_id", utilities.handleErrors(invController.buildDeleteInventory))
+router.get("/delete/:inv_id", 
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.buildDeleteInventory))
 
 // Route to delete an inventory 
-router.post("/delete", utilities.handleErrors(invController.deleteInventory))
+router.post("/delete", 
+    utilities.checkAccountType,
+    utilities.handleErrors(invController.deleteInventory))
 
 module.exports = router;

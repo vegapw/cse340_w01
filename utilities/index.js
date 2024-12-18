@@ -146,6 +146,47 @@ Util.checkLogin = async (req, res, next) => {
 }
 
 /* ****************************************
+* Build Login Links
+**************************************** */
+
+Util.buildLoginLinks = async (loggedin, accountData) => {
+  let loginLinks = `<a title="Click to log in" href="/account/login">My Account</a>`
+  if (loggedin) {
+    loginLinks = `<a title="Go to profile" href="/account/">Welcome ${accountData.account_firstname}</a>`
+    loginLinks += `-<a title="Log out" href="/account/logout">Log out</a>`
+    return loginLinks
+  } 
+  return loginLinks
+}
+
+/* ****************************************
+* Check account_type
+**************************************** */
+Util.checkAccountType = async (req, res, next) => {
+  const type = res.locals.accountData.account_type
+  if (type == 'Employee' || type == 'Admin') {
+    next()
+  } else {
+    req.flash("notice", "Please log in with the appropriate credentials to access this page.")
+    return res.redirect("/account/login")
+  }
+}
+
+/* ****************************************
+* Build Management Welcome
+**************************************** */
+
+Util.buildManagementWelcome = async (accountData) => {
+  let welcome = `<h2>Welcome ${accountData.account_firstname}</h2>`
+  const type = accountData.account_type
+  welcome += `<p><a title="Update account information" href="/account/update/${accountData.account_id}">Edit account information</a></p>`
+  if (type == 'Employee' || type == 'Admin') {
+    welcome += `<h3>Inventory Management</h3><p><a title="Inventory Management" href="/inv/">Manage Inventory</a></p>`
+  } 
+  return welcome
+}
+
+/* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
  * General Error Handling
